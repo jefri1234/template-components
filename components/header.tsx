@@ -1,12 +1,29 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Plus, Search } from "lucide-react"
+import Image from "next/image"
+import { usePathname } from "next/navigation"
+
 
 export function Header() {
+  const pathname = usePathname()
   return (
     <header className="h-16 border-b bg-white flex items-center justify-between px-4">
-      <h1 className="text-xl font-semibold">Product</h1>
 
+      <div className="flex items-center gap-2">
+        <div className=" border-b flex items-center justify-center h-[70px]">
+          <Image
+            src="/favicon.ico"
+            alt="Logo"
+            width={60}
+            height={60}
+            className="w-15 h-15"
+          />
+        </div>
+        <h1 className="text-xl font-semibold">{pathname}</h1>
+
+      </div>
       <div className="flex items-center gap-2">
         <div className="relative w-full md:w-auto">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
