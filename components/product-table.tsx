@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 import {
   ArrowUp,
   ChevronLeft,
@@ -11,25 +11,16 @@ import {
   Pencil,
   Trash,
   Computer,
-} from "lucide-react"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Checkbox } from "@/components/ui/checkbox"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+} from "lucide-react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Checkbox } from "@/components/ui/checkbox";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
-// Datos de ejemplo
 const products = [
   { id: 1, name: "MacBook Pro with M2 Chip", price: 1200, stock: 1248, rating: 4.8, image: "laptop" },
-  {
-    id: 2,
-    name: "iPhone 15 128 / 256 / 512 IBOX",
-    price: 1660,
-    stock: 2492,
-    rating: 5.0,
-    image: "phone",
-    selected: true,
-  },
+  { id: 2, name: "iPhone 15 128 / 256 / 512 IBOX", price: 1660, stock: 2492, rating: 5.0, image: "phone", selected: true },
   { id: 3, name: "Apple Watch Ultra 2 Alphine", price: 999, stock: 248, rating: 4.7, image: "watch" },
   { id: 4, name: "iPhone 15 Pro Max 256", price: 1600, stock: 124, rating: 4.2, image: "phone" },
   { id: 5, name: "MacBook Pro with M2 Chip", price: 1200, stock: 2901, rating: 5.0, image: "laptop" },
@@ -38,22 +29,21 @@ const products = [
   { id: 8, name: "iPhone 15 Pro Max 256", price: 1660, stock: 120, rating: 4.4, image: "phone" },
   { id: 9, name: "iPhone 15 128 / 256 / 512 IBOX", price: 1660, stock: 129, rating: 4.5, image: "phone" },
   { id: 10, name: "Apple Watch Series 9 45MM", price: 999, stock: 1109, rating: 4.8, image: "watch" },
-]
+];
 
 export function ProductTable() {
-  const [activeTab, setActiveTab] = useState("published")
-  const [currentPage, setCurrentPage] = useState(1)
+  const [activeTab, setActiveTab] = useState("published");
+  const [currentPage, setCurrentPage] = useState(1);
 
   return (
-    <Card>
-      <CardHeader className="p-4 flex flex-row items-center justify-between">
+    <Card className="bg-card text-card-foreground">
+      <CardHeader className="p-4 flex flex-row items-center justify-between border-b border-border">
         <Tabs defaultValue="published" className="w-auto" onValueChange={setActiveTab}>
           <TabsList>
             <TabsTrigger value="published">Published</TabsTrigger>
             <TabsTrigger value="draft">Draft</TabsTrigger>
           </TabsList>
         </Tabs>
-
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" className="h-8 gap-1">
             <Filter className="h-3.5 w-3.5" />
@@ -65,12 +55,11 @@ export function ProductTable() {
           </Button>
         </div>
       </CardHeader>
-
       <CardContent className="p-0">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b">
+              <tr className="border-b border-border">
                 <th className="w-[40px] px-4 py-3">
                   <Checkbox />
                 </th>
@@ -104,16 +93,19 @@ export function ProductTable() {
             </thead>
             <tbody>
               {products.map((product) => (
-                <tr key={product.id} className={`border-b hover:bg-gray-50 ${product.selected ? "bg-blue-50" : ""}`}>
+                <tr
+                  key={product.id}
+                  className={`border-b border-border hover:bg-muted ${product.selected ? "bg-blue-50 dark:bg-blue-900/50" : ""}`}
+                >
                   <td className="px-4 py-3">
                     <Checkbox checked={product.selected} />
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 bg-gray-200 rounded flex items-center justify-center">
+                      <div className="w-6 h-6 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
                         {product.image === "laptop" && <Computer className="h-3 w-3" />}
-                        {product.image === "phone" && <div className="h-3 w-3 bg-gray-500 rounded-sm" />}
-                        {product.image === "watch" && <div className="h-3 w-3 bg-gray-500 rounded-full" />}
+                        {product.image === "phone" && <div className="h-3 w-3 bg-gray-500 dark:bg-gray-400 rounded-sm" />}
+                        {product.image === "watch" && <div className="h-3 w-3 bg-gray-500 dark:bg-gray-400 rounded-full" />}
                       </div>
                       <span className="text-sm">{product.name}</span>
                     </div>
@@ -155,13 +147,11 @@ export function ProductTable() {
             </tbody>
           </table>
         </div>
-
         <div className="flex items-center justify-between p-4">
           <Button variant="outline" size="sm" onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}>
             <ChevronLeft className="h-4 w-4 mr-1" />
             Prev
           </Button>
-
           <div className="flex items-center gap-1">
             {[1, 2, "...", 8, 9].map((page, i) => (
               <Button
@@ -176,7 +166,6 @@ export function ProductTable() {
               </Button>
             ))}
           </div>
-
           <Button variant="outline" size="sm" onClick={() => setCurrentPage(currentPage + 1)}>
             Next
             <ChevronRight className="h-4 w-4 ml-1" />
@@ -184,17 +173,17 @@ export function ProductTable() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function Star({ rating }: { rating: number }) {
-  const fullStars = Math.floor(rating)
-  const hasHalfStar = rating % 1 >= 0.5
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
 
   return (
     <div className="flex">
       {[...Array(5)].map((_, i) => (
-        <div key={i} className="text-yellow-400">
+        <div key={i} className="text-yellow-400 dark:text-yellow-300">
           {i < fullStars ? (
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
               <path
@@ -207,7 +196,7 @@ function Star({ rating }: { rating: number }) {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
               <path
                 fillRule="evenodd"
-                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.760-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
                 clipRule="evenodd"
               />
             </svg>
@@ -230,6 +219,5 @@ function Star({ rating }: { rating: number }) {
         </div>
       ))}
     </div>
-  )
+  );
 }
-

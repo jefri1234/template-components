@@ -1,28 +1,27 @@
-import { ArrowUp, MoreHorizontal } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { ArrowUp, MoreHorizontal } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export function SalesStats() {
   return (
     <div className="space-y-4">
       <SalesCard title="Sales This Week" amount="$12,100" sold={67} change={22} />
-
       <SalesCard title="Total Sales" amount="$4,125,100" sold={4619} change={2} />
     </div>
-  )
+  );
 }
 
 interface SalesCardProps {
-  title: string
-  amount: string
-  sold: number
-  change: number
+  title: string;
+  amount: string;
+  sold: number;
+  change: number;
 }
 
 function SalesCard({ title, amount, sold, change }: SalesCardProps) {
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
+    <Card className="bg-card text-card-foreground">
+      <CardHeader className="flex flex-row items-center justify-between pb-2 border-b border-border">
         <CardTitle className="text-lg font-medium">{title}</CardTitle>
         <Button variant="ghost" size="icon" className="h-8 w-8">
           <MoreHorizontal className="h-4 w-4" />
@@ -30,10 +29,9 @@ function SalesCard({ title, amount, sold, change }: SalesCardProps) {
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
-          <div className="text-sm text-gray-500">{sold} Sold</div>
+          <div className="text-sm text-muted-foreground">{sold} Sold</div>
           <div className="text-3xl font-bold">{amount}</div>
         </div>
-
         <div className="relative h-24">
           <svg className="w-full h-full" viewBox="0 0 100 30">
             <path
@@ -44,15 +42,13 @@ function SalesCard({ title, amount, sold, change }: SalesCardProps) {
             />
           </svg>
         </div>
-
         <div className="flex justify-end">
-          <div className="bg-blue-100 text-blue-700 px-2 py-1 rounded-md text-xs font-medium flex items-center">
+          <div className="bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 px-2 py-1 rounded-md text-xs font-medium flex items-center">
             <ArrowUp className="mr-1 h-3 w-3" />
             {change}%
           </div>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
-

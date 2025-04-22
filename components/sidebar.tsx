@@ -11,7 +11,6 @@ import {
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-// Tipos de modo de sidebar
 export type SidebarMode =
   | "iconOnly"
   | "iconText"
@@ -41,7 +40,7 @@ export function Sidebar() {
   })()
 
   return (
-    <aside className={`bg-white border-r flex flex-col pt-14 relative ${sidebarWidthClass}`}>
+    <aside className={`bg-white dark:bg-gray-900 border-r dark:border-gray-800 flex flex-col pt-14 relative ${sidebarWidthClass}`}>
       <nav className="flex-1 w-full pt-5">
         <ul className="space-y-2">
           <SidebarItem
@@ -85,7 +84,7 @@ export function Sidebar() {
         </ul>
 
         {showOptions && (
-          <div className="absolute left-[85px] top-[calc(70px+6*48px+20px)] bg-white border rounded shadow-md z-50 w-44">
+          <div className="absolute left-[85px] top-[calc(70px+6*48px+20px)] bg-white dark:bg-gray-800 border dark:border-gray-700 rounded shadow-md z-50 w-44">
             <ul className="py-2">
               <li>
                 <button
@@ -93,7 +92,7 @@ export function Sidebar() {
                     setSidebarMode("iconText")
                     setShowOptions(false)
                   }}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100"
                 >
                   Modo Ícono + Texto
                 </button>
@@ -104,7 +103,7 @@ export function Sidebar() {
                     setSidebarMode("collapseOnHover")
                     setShowOptions(false)
                   }}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100"
                 >
                   Modo Collapse Hover
                 </button>
@@ -115,7 +114,7 @@ export function Sidebar() {
                     setSidebarMode("expandOnHover")
                     setShowOptions(false)
                   }}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100"
                 >
                   Modo Expand Hover
                 </button>
@@ -126,7 +125,7 @@ export function Sidebar() {
                     setSidebarMode("iconOnly")
                     setShowOptions(false)
                   }}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100"
                 >
                   Modo Solo Íconos
                 </button>
@@ -157,8 +156,6 @@ function SidebarItem({
   onClick,
 }: SidebarItemProps) {
   const pathname = usePathname()
-
-  // Detecta si el item está activo por ruta
   const isActive = !isOptionButton && pathname === href
 
   return (
@@ -173,10 +170,12 @@ function SidebarItem({
         }}
         className={`
           flex items-center h-12 w-full px-2 
-          ${isActive ? "text-blue-600 border-l-4 border-blue-600" : "text-gray-500 hover:text-gray-900"}
+          ${isActive
+            ? "text-blue-600 dark:text-blue-400 border-l-4 border-blue-600 dark:border-blue-400"
+            : "text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"}
         `}
       >
-        <div className="border rounded-md p-2">{icon}</div>
+        <div className="border dark:border-gray-600 rounded-md p-2">{icon}</div>
 
         {sidebarMode === "iconText" && (
           <span className="ml-2">{label}</span>
@@ -190,7 +189,7 @@ function SidebarItem({
       {sidebarMode === "collapseOnHover" && (
         <span
           className="absolute left-full ml-2 top-1/2 -translate-y-1/2
-            bg-gray-800 text-white text-xs px-2 py-1 rounded
+            bg-gray-800 dark:bg-gray-700 text-white text-xs px-2 py-1 rounded
             opacity-0 group-hover:opacity-100 transition-opacity
             pointer-events-none whitespace-nowrap z-50"
         >
